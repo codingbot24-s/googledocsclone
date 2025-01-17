@@ -11,3 +11,5 @@ export const useEditorStore = create<EditorState>((set) => ({
   editor: null,
   setEditor: (editor) => set({ editor }),
 }))
+
+
