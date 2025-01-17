@@ -8,12 +8,40 @@ import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
-import Image from '@tiptap/extension-image'
+import Image from "@tiptap/extension-image";
+import Underline from "@tiptap/extension-underline";
 // import ImageResize from 'tiptap/extension-image-resize'
+import { useEditorStore } from "@/app/store/use-editor-store";
 
 
 const Tiptap = () => {
+  const { setEditor } = useEditorStore();
+
   const editor = useEditor({
+    onCreate: ({ editor }) => {
+      setEditor(editor);
+    },
+    onDestroy: () => {
+      setEditor(null);
+    },
+    onUpdate: ({ editor }) => {
+      setEditor(editor);
+    },
+    onSelectionUpdate: ({ editor }) => {
+      setEditor(editor);
+    },
+    onFocus: ({ editor }) => {
+      setEditor(editor);
+    },
+    onTransaction: ({ editor }) => {
+      setEditor(editor);
+    },
+    onBlur: ({ editor }) => {
+      setEditor(editor);
+    },
+    onContentError: ({ editor }) => {
+      setEditor(editor);
+    },
     editorProps: {
       attributes: {
         style: "padding-left:56px; pading-right:56px;",
@@ -33,6 +61,7 @@ const Tiptap = () => {
       Table,
       Image,
       // ImageResize
+      Underline,
     ],
     content: `
         <table>
