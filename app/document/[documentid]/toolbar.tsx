@@ -25,6 +25,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
+import {type Level} from "@tiptap/extension-heading";
 
 const HeadingButton = () => {
   const { editor } = useEditorStore();
@@ -65,9 +66,13 @@ const HeadingButton = () => {
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
         {headings.map(({ label, value, fontsize }) => (
           <button
-            // onClick={() => {
-            //   editor?.chain().focus().toggleHeading({ level: value }).run();
-            // }}
+            onClick={() => {
+              if (value === 0) {
+                editor?.chain().focus().setParagraph().run();
+              }else {
+                editor?.chain().focus().toggleHeading({ level: value as Level }).run();
+              }
+            }}  
             key={value}
             className={cn(
               "flex items—center gap-x—2 px—2 py—1 rounded—sm hover:bg-neutral-200/80",
@@ -252,7 +257,7 @@ export default function Toolbar() {
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       <FontFamilyButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      {/* TODO Font Heading */}
+      <HeadingButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {/* TODO Font Size*/}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
