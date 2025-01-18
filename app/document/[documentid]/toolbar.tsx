@@ -15,7 +15,135 @@ import {
   MessageSquarePlusIcon,
   ListTodoIcon,
   RemoveFormattingIcon,
+  ChevronDownIcon,
 } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+} from "@/components/ui/dropdown-menu";
+
+const HeadingButton = () => {
+  const { editor } = useEditorStore();
+
+  const headings = [
+    { label: "Normal text", value: 0, fontsize: "16px" },
+    { label: "Heading 1", value: 1, fontsize: "32px" },
+    { label: "Heading 2", value: 2, fontsize: "24px" },
+    { label: "Heading 3", value: 3, fontsize: "20px" },
+    { label: "Heading 4", value: 4, fontsize: "18px" },
+    { label: "Heading 5", value: 5, fontsize: "16px" },
+  ];
+
+  function getCurrentHeading() {
+    for (let level = 1; level <= headings.length; level++) {
+      if (editor?.isActive(`heading${level}`)) {
+        return level;
+      }
+    }
+
+    return "Normal text";
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+      <button
+          className={cn(
+            "h—7 shrink—0 flex items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 shrink—0 px—1.5 overflow—hidden text—sm"
+          )}
+        >
+          <span className="truncate">
+            {getCurrentHeading()}
+          </span>
+          <ChevronDownIcon className="size-4 ml-2 shrink-0" />
+      </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+        {headings.map(({ label, value, fontsize }) => (
+          <button
+            // onClick={() => {
+            //   editor?.chain().focus().toggleHeading({ level: value }).run();
+            // }}
+            key={value}
+            className={cn(
+              "flex items—center gap-x—2 px—2 py—1 rounded—sm hover:bg-neutral-200/80",
+              (value === 0 && !editor?.isActive("heading")) || !editor?.isActive(`heading${value}`) && "bg-neutral-200/80"
+            )}
+            style={{ fontSize: fontsize }}
+          >
+            <span className="text-sm">{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+};
+
+const FontFamilyButton = () => {
+  const { editor } = useEditorStore();
+
+  const fonts = [
+    {
+      label: "Arial",
+      value: "Arial",
+    },
+    {
+      label: "Times New Roman",
+      value: "Times New Roman",
+    },
+    {
+      label: "Courier New",
+      value: "Courier New",
+    },
+    {
+      label: "Georgia",
+      value: "Georgia",
+    },
+    {
+      label: "Verdana",
+      value: "Verdana",
+    },
+  ];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={cn(
+            "h—7 shrink—0 flex items—center justify—between rounded—sm hover:bg—neutral-200/80 w-[120px] shrink—0 px—1.5 overflow—hidden text—sm]"
+          )}
+        >
+          <span className="truncate">
+            {editor?.getAttributes("textStyle").fontFamily || "Arial"}
+          </span>
+          <ChevronDownIcon className="size-4 ml-2 shrink-0" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+        {fonts.map(({ label, value }) => (
+          <button
+            onClick={() => {
+              editor?.chain().focus().setFontFamily(value).run();
+            }}
+            key={value}
+            className={cn(
+              "flex items—center gap-x—2 px—2 py—1 rounded—sm hover:bg-neutral-200/80",
+              editor?.getAttributes("textStyle").fontFamily === value &&
+                "bg—neutral-200/80"
+            )}
+            style={{ fontFamily: value }}
+          >
+            <span className="text-sm">{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -103,26 +231,26 @@ export default function Toolbar() {
         isActive: false, // TODO : add comment feature
       },
       {
-        label : "ListTodo",
-        icon : ListTodoIcon,
-        onClick : () => editor?.chain().focus().toggleTaskList().run(),
-        isActive : editor?.isActive("taskList"),
-      },{
-        label : "RemoveFormat",
-        icon : RemoveFormattingIcon,
-        onClick : () => editor?.chain().focus().unsetAllMarks().run(),
-    
-      }
+        label: "ListTodo",
+        icon: ListTodoIcon,
+        onClick: () => editor?.chain().focus().toggleTaskList().run(),
+        isActive: editor?.isActive("taskList"),
+      },
+      {
+        label: "RemoveFormat",
+        icon: RemoveFormattingIcon,
+        onClick: () => editor?.chain().focus().unsetAllMarks().run(),
+      },
     ],
   ];
 
   return (
-    <div className="bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24-px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto ">
+    <div className="bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24-px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto">
       {sections[0].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      {/* TODO Font family */}
+      <FontFamilyButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {/* TODO Font Heading */}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
