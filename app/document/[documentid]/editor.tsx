@@ -10,6 +10,7 @@ import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
 import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
+import TextAlign from "@tiptap/extension-text-align";
 // import ImageResize from 'tiptap/extension-image-resize'
 import { useEditorStore } from "@/app/store/use-editor-store";
 import FontFamily from "@tiptap/extension-font-family";
@@ -74,7 +75,10 @@ const Tiptap = () => {
       }),
       Link.configure({
         openOnClick: false,
-      })
+      }),
+      TextAlign.configure({
+        types : ["heading", "paragraph"],
+      }),
     ],
     content: `
         <table>
