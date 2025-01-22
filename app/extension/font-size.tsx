@@ -3,8 +3,10 @@ import "@tiptap/extension-text-style";
 
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
-    fontSize: (attributes: { size: string }) => ReturnType;
-    unsetFontSize: () => ReturnType;
+    fontSize : {
+      setFontSize: (fontsize: string) => ReturnType,
+      unsetFontFamily: () => ReturnType,
+    }
   }
 }
 
@@ -37,11 +39,15 @@ export const FontSizeExtension = Extension.create({
       },
     ];
   },
-    //   addCommands() {
-    //     return {
-    //       setFontSize: (fontsize : string) => () => {    
-    //         return
-    //       }
-    //     };
-    //   } ,
+  addCommands() {
+    return {
+      setFontSize: (fontsize: string) => ({chain} : any) => {
+        return chain().setMark("textStyle", {fontsize}).run();
+      },
+      unsetFontFamily: () => ({chain}) => {
+        return chain().setMark("textStyle",{fontsize : null}).removeEmptyTextStyle().run();
+      }
+    };
+  },
 });
+ 
