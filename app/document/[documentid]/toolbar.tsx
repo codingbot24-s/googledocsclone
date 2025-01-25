@@ -59,7 +59,6 @@ const FontSizeButton = () => {
   const currentFontSize = editor?.getAttributes("textStyle").fontsize
     ? editor.getAttributes("textStyle").fontsize.replace("px", "")
     : "16";
-
   const [fontSize, setFontSize] = useState(currentFontSize);
   const [inputValue, setInputValue] = useState(fontSize);
   const [isEditing, setIsEditing] = useState(false);
@@ -86,7 +85,7 @@ const FontSizeButton = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       updateFontSize(inputValue);
-      editor?.commands.focus;
+      editor?.commands.focus(); // Added () to actually call focus
     }
   };
 
@@ -103,10 +102,10 @@ const FontSizeButton = () => {
   };
 
   return (
-    <div className="flex  items-center gap-.5">
+    <div className="flex items-center gap-0.5">
       <button
         onClick={Decrement}
-        className="h—7 w-7 shrink—0 flex items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7"
+        className="h-7 w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7"
       >
         <MinusIcon className="size-4" />
       </button>
@@ -116,7 +115,7 @@ const FontSizeButton = () => {
           onChange={handleInputChange}
           onBlur={handleInputBlur}
           onKeyDown={handleInputKeyDown}
-          className="h—7 w-10 text-sm rounded—sm bg-transparent min-w-7 border-neutral-400 border text-center focus:outline-none focus:ring-0"
+          className="h-7 w-10 text-sm rounded-sm bg-transparent min-w-7 border-neutral-400 border text-center focus:outline-none focus:ring-0"
           type="text"
         />
       ) : (
@@ -125,14 +124,14 @@ const FontSizeButton = () => {
             setIsEditing(true);
             setFontSize(currentFontSize);
           }}
-          className="h—7 w-10 text-sm rounded—sm min-w-7 bg-transparent border-neutral-400 border text-center cursor-text"
+          className="h-7 w-10 text-sm rounded-sm min-w-7 bg-transparent border-neutral-400 border text-center cursor-text"
         >
           {currentFontSize}
         </button>
       )}
       <button
         onClick={Increment}
-        className="h—7 w-7 shrink—0 flex items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7"
+        className="h-7 w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7"
       >
         <PlusIcon className="size-4" />
       </button>
@@ -163,7 +162,7 @@ const ListButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h—7 shrink—0 flex flex-col items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 px—1.5 overflow—hidden text—sm"
+            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
           )}
         >
           <AlignLeftIcon className="size-4" />
@@ -177,8 +176,8 @@ const ListButton = () => {
               onClick();
             }}
             className={cn(
-              "flex items—center gap-x—2 px—2 py—1 rounded—sm hover:bg-neutral-200/80",
-              isActive && "bg—neutral-200/80"
+              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+              isActive && "bg-neutral-200/80"
             )}
           >
             <Icon className="size-4" />
@@ -221,7 +220,7 @@ const AlignButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h—7 shrink—0 flex flex-col items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 px—1.5 overflow—hidden text—sm"
+            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
           )}
         >
           <AlignLeftIcon className="size-4" />
@@ -235,8 +234,8 @@ const AlignButton = () => {
               editor?.chain().focus().setTextAlign(value).run();
             }}
             className={cn(
-              "flex items—center gap-x—2 px—2 py—1 rounded—sm hover:bg-neutral-200/80",
-              editor?.isActive({ textAlign: value }) && "bg—neutral-200/80"
+              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+              editor?.isActive({ textAlign: value }) && "bg-neutral-200/80"
             )}
           >
             <Icon className="size-4" />
@@ -289,7 +288,7 @@ const ImageButton = () => {
         <DropdownMenuTrigger asChild>
           <button
             className={cn(
-              "h—7 shrink—0 flex flex-col items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 px—1.5 overflow—hidden text—sm"
+              "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
             )}
           >
             <ImageIcon className="size-4" />
@@ -351,7 +350,7 @@ const LinkButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h—7 shrink—0 flex flex-col items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 px—1.5 overflow—hidden text—sm"
+            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
           )}
         >
           <Link2Icon className="size-4" />
@@ -383,7 +382,7 @@ const HighlightColorButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h—7 shrink—0 flex flex-col items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 px—1.5 overflow—hidden text—sm"
+            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
           )}
         >
           <HighlighterIcon className="size-4" />
@@ -410,7 +409,7 @@ const TextColorButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h—7 shrink—0 flex flex-col items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 px—1.5 overflow—hidden text—sm"
+            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
           )}
         >
           <span className="text-xs">A</span>
@@ -454,7 +453,7 @@ const HeadingButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h—7 shrink—0 flex items—center justify—center rounded—sm hover:bg—neutral-200/80 min-w-7 shrink—0 px—1.5 overflow—hidden text—sm"
+            "h-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 shrink-0 px-1.5 overflow-hidden text-sm"
           )}
         >
           <span className="truncate">{getCurrentHeading()}</span>
@@ -477,7 +476,7 @@ const HeadingButton = () => {
             }}
             key={value}
             className={cn(
-              "flex items—center gap-x—2 px—2 py—1 rounded—sm hover:bg-neutral-200/80",
+              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
               (value === 0 && !editor?.isActive("heading")) ||
                 (!editor?.isActive(`heading${value}`) && "bg-neutral-200/80")
             )}
@@ -522,7 +521,7 @@ const FontFamilyButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h—7 shrink—0 flex items—center justify—between rounded—sm hover:bg—neutral-200/80 w-[120px] shrink—0 px—1.5 overflow—hidden text—sm]"
+            "h-7 shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 w-[120px] shrink-0 px-1.5 overflow-hidden text-sm]"
           )}
         >
           <span className="truncate">
@@ -539,9 +538,9 @@ const FontFamilyButton = () => {
             }}
             key={value}
             className={cn(
-              "flex items—center gap-x—2 px—2 py—1 rounded—sm hover:bg-neutral-200/80",
+              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
               editor?.getAttributes("textStyle").fontFamily === value &&
-                "bg—neutral-200/80"
+                "bg-neutral-200/80"
             )}
             style={{ fontFamily: value }}
           >
