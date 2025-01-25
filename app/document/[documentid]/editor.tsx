@@ -56,6 +56,7 @@ const Tiptap = () => {
     },
     extensions: [
       StarterKit,
+      FontSizeExtension,
       TaskList,
       Taskitem.configure({
         nested: true,
@@ -79,7 +80,6 @@ const Tiptap = () => {
       TextAlign.configure({
         types : ["heading", "paragraph"],
       }),
-      FontSizeExtension,
     ],
     content: `
         <table>

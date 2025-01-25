@@ -53,7 +53,7 @@ import {
 } from "@/components/ui/dialog";
 
 
-// Fix the font size button
+
 const FontSizeButton = () => {
   const { editor } = useEditorStore();
   const currentFontSize = editor?.getAttributes("textStyle").fontsize
@@ -65,8 +65,8 @@ const FontSizeButton = () => {
 
   const updateFontSize = (newSize: string) => {
     const size = parseInt(newSize);
-    if (!isNaN(size) && size > 0) {
-      editor?.chain().setFontSize(`${size}px`).run();
+    if (!isNaN(size) && size > 0 && editor) {
+      editor.chain().focus().setFontSize(size).run();
       setFontSize(newSize);
       setIsEditing(false);
       setInputValue(newSize);
@@ -85,7 +85,7 @@ const FontSizeButton = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       updateFontSize(inputValue);
-      editor?.commands.focus(); // Added () to actually call focus
+      editor?.commands.focus(); 
     }
   };
 
@@ -220,7 +220,7 @@ const AlignButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
+            "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
           )}
         >
           <AlignLeftIcon className="size-4" />
@@ -234,8 +234,8 @@ const AlignButton = () => {
               editor?.chain().focus().setTextAlign(value).run();
             }}
             className={cn(
-              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              editor?.isActive({ textAlign: value }) && "bg-neutral-200/80"
+              "fl-ex itemscenter gap-x2 px2 py1 roundedsm hover:bg-neutral-200/80",
+              editor?.isActive({ textAlign: value }) && "bgneutral-200/80"
             )}
           >
             <Icon className="size-4" />
@@ -288,7 +288,7 @@ const ImageButton = () => {
         <DropdownMenuTrigger asChild>
           <button
             className={cn(
-              "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
+              "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
             )}
           >
             <ImageIcon className="size-4" />
@@ -350,7 +350,7 @@ const LinkButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
+            "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
           )}
         >
           <Link2Icon className="size-4" />
@@ -382,7 +382,7 @@ const HighlightColorButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
+            "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
           )}
         >
           <HighlighterIcon className="size-4" />
@@ -409,7 +409,7 @@ const TextColorButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px-1.5 overflow-hidden text-sm"
+            "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
           )}
         >
           <span className="text-xs">A</span>
@@ -453,7 +453,7 @@ const HeadingButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 shrink-0 px-1.5 overflow-hidden text-sm"
+            "h7 s-h-rink0 flex itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 shrink0 px1.5 overflowhidden textsm"
           )}
         >
           <span className="truncate">{getCurrentHeading()}</span>
@@ -476,7 +476,7 @@ const HeadingButton = () => {
             }}
             key={value}
             className={cn(
-              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+              "flex itemsc-enter gap-x2 px2 py1 roundedsm hover:bg-neutral-200/80",
               (value === 0 && !editor?.isActive("heading")) ||
                 (!editor?.isActive(`heading${value}`) && "bg-neutral-200/80")
             )}
@@ -521,7 +521,7 @@ const FontFamilyButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h-7 shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 w-[120px] shrink-0 px-1.5 overflow-hidden text-sm]"
+            "h7 s-h-rink0 flex itemscenter justifybetween roundedsm hover:bgneutral-200/80 w-[120px] shrink0 px1.5 overflowhidden textsm]"
           )}
         >
           <span className="truncate">
@@ -538,9 +538,9 @@ const FontFamilyButton = () => {
             }}
             key={value}
             className={cn(
-              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+              "flex itemsc-enter gap-x2 px2 py1 roundedsm hover:bg-neutral-200/80",
               editor?.getAttributes("textStyle").fontFamily === value &&
-                "bg-neutral-200/80"
+                "bgneu-tral-200/80"
             )}
             style={{ fontFamily: value }}
           >
