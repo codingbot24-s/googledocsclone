@@ -30,12 +30,12 @@ import {
   ListOrderedIcon,
   MinusIcon,
   PlusIcon,
+  ListCollapseIcon,
 } from "lucide-react";
 
 import {
   DropdownMenu,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
@@ -53,6 +53,49 @@ import {
 } from "@/components/ui/dialog";
 
 
+const LineHeightButton = () => {
+  const { editor } = useEditorStore();
+
+    const lineHeights = [
+      {label : "default", value : "normal"},
+      {label:  "single", value : "1"},
+      {label : "1.5", value : "1.5"},
+      {label :  "1.15", value : "1.15"},
+      {label :  "Double", value : "2"},
+
+    ]
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={cn(
+            "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
+          )}
+        >
+          <ListCollapseIcon className="size-4" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+        {lineHeights.map(({ label, value}) => (
+          <button
+            key={value}
+            onClick={() => {
+              editor?.chain().focus().setLineHeight(value).run();
+            }}
+            className={cn(
+              "fl-ex itemscenter gap-x2 px2 py1 roundedsm hover:bg-neutral-200/80",
+              editor?.getAttributes("paragraph").lineHeight === value && "bg-neutral-200/80"
+            )}
+          >
+            
+            <span className="text-sm">{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const FontSizeButton = () => {
   const { editor } = useEditorStore();
@@ -672,7 +715,7 @@ export default function Toolbar() {
       <LinkButton />
       <ImageButton />
       <AlignButton />
-      {/* TODO Line hieght */}
+      <LineHeightButton />
       <ListButton />
       {sections[2].map((item) => (
         <ToolbarButton key={item.label} {...item} />
