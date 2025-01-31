@@ -52,18 +52,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-
 const LineHeightButton = () => {
   const { editor } = useEditorStore();
 
-    const lineHeights = [
-      {label : "default", value : "normal"},
-      {label:  "single", value : "1"},
-      {label : "1.5", value : "1.5"},
-      {label :  "1.15", value : "1.15"},
-      {label :  "Double", value : "2"},
-
-    ]
+  const lineHeights = [
+    { label: "default", value: "normal" },
+    { label: "single", value: "1" },
+    { label: "1.5", value: "1.5" },
+    { label: "1.15", value: "1.15" },
+    { label: "Double", value: "2" },
+  ];
 
   return (
     <DropdownMenu>
@@ -77,7 +75,7 @@ const LineHeightButton = () => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
-        {lineHeights.map(({ label, value}) => (
+        {lineHeights.map(({ label, value }) => (
           <button
             key={value}
             onClick={() => {
@@ -85,10 +83,10 @@ const LineHeightButton = () => {
             }}
             className={cn(
               "fl-ex itemscenter gap-x2 px2 py1 roundedsm hover:bg-neutral-200/80",
-              editor?.getAttributes("paragraph").lineHeight === value && "bg-neutral-200/80"
+              editor?.getAttributes("paragraph").lineHeight === value &&
+                "bg-neutral-200/80"
             )}
           >
-            
             <span className="text-sm">{label}</span>
           </button>
         ))}
@@ -128,7 +126,7 @@ const FontSizeButton = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       updateFontSize(inputValue);
-      editor?.commands.focus(); 
+      editor?.commands.focus();
     }
   };
 

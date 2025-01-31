@@ -20,10 +20,12 @@ import Highlight from "@tiptap/extension-highlight"
 import Link from "@tiptap/extension-link"
 import { FontSizeExtension } from "@/app/extension/font-size";
 import { LineHeight } from "@/app/extension/line-height";
+// import Ruler from "./ruler";
 const Tiptap = () => {
   const { setEditor } = useEditorStore();
 
   const editor = useEditor({
+    immediatelyRender : false,
     onCreate: ({ editor }) => {
       setEditor(editor);
     },
@@ -106,6 +108,7 @@ const Tiptap = () => {
 
   return (
     <div className="size-full overflow-x-auto bg-[#FAFBFD] px-4 print:bg-white print:overflow-visible">
+      {/* <Ruler/> */}
       <div className="min-w-max flex justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
       </div>

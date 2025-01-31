@@ -1,6 +1,6 @@
 import Editor from "./editor";
 import Toolbar from "./toolbar";
-
+import Navbar from "./navbar";
 
 interface DocumentIdpageProps {
     params: Promise<{
@@ -15,6 +15,7 @@ export default async function DocumentIdpage({ params }: DocumentIdpageProps) {
     return (
         
         <div className="min-h-screen bg-[#FAFBFD]">
+            <Navbar />
             <Toolbar />
             <Editor />
         </div>
