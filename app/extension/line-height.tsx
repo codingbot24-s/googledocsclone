@@ -40,38 +40,38 @@ export const LineHeight = Extension.create({
   },
   addCommands() {
     return {
-        setLineHeight: (lineHeight:string) => ({tr, state, dispatch }) => {
-            const { selection } = state;
-            tr = tr.setSelection(selection);
+      setLineHeight: (lineHeight: string) => ({ tr, state, dispatch }) => {
+        const { selection } = state;
+        tr = tr.setSelection(selection);
 
-            const {from, to} = selection;
-            state.doc.nodesBetween(from, to, (node, pos) => {
-                if (this.options.types.includes(node.type.name)) {
-                    tr.setNodeMarkup(pos, undefined, {
-                        ...node.attrs,
-                        lineHeight,
-                    })
-                }
+        const { from, to } = selection;
+        state.doc.nodesBetween(from, to, (node, pos) => {
+          if (this.options.types.includes(node.type.name)) {
+            tr.setNodeMarkup(pos, undefined, {
+              ...node.attrs,
+              lineHeight,
             })
-            if (dispatch) dispatch(tr);
-            return true;
-        },
-        unsetLineHeight: () => ({tr, state, dispatch }) => {
-            const { selection } = state;
-            tr = tr.setSelection(selection);
+          }
+        })
+        if (dispatch) dispatch(tr);
+        return true;
+      },
+      unsetLineHeight: () => ({ tr, state, dispatch }) => {
+        const { selection } = state;
+        tr = tr.setSelection(selection);
 
-            const {from, to} = selection;
-            state.doc.nodesBetween(from, to, (node, pos) => {
-                if (this.options.types.includes(node.type.name)) {
-                    tr = tr.setNodeMarkup(pos, undefined, {
-                        ...node.attrs,
-                        lineHeight: this.options.default,
-                    })
-                }
+        const { from, to } = selection;
+        state.doc.nodesBetween(from, to, (node, pos) => {
+          if (this.options.types.includes(node.type.name)) {
+            tr = tr.setNodeMarkup(pos, undefined, {
+              ...node.attrs,
+              lineHeight: this.options.default,
             })
-            if (dispatch) dispatch(tr);
-            return true;
-        }
+          }
+        })
+        if (dispatch) dispatch(tr);
+        return true;
+      }
     }
   }
 });
