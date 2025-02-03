@@ -329,7 +329,7 @@ const ImageButton = () => {
         <DropdownMenuTrigger asChild>
           <button
             className={cn(
-              "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
+              "h7 s-h-rink0 flex flex-col items-center justify-center rounded-sm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
             )}
           >
             <ImageIcon className="size-4" />
@@ -450,7 +450,7 @@ const TextColorButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h7 s-h-rink0 flex flex-col itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 px1.5 overflowhidden textsm"
+            "h7 s-h-rink0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 px1.5 overflow-hidden text-sm"
           )}
         >
           <span className="text-xs">A</span>
@@ -494,7 +494,7 @@ const HeadingButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            "h7 s-h-rink0 flex itemscenter justifycenter roundedsm hover:bgneutral-200/80 min-w-7 shrink0 px1.5 overflowhidden textsm"
+            "h7 s-h-rink0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 min-w-7 shrink-0 px1.5 overflow-hidden text-sm"
           )}
         >
           <span className="truncate">{getCurrentHeading()}</span>
@@ -517,7 +517,7 @@ const HeadingButton = () => {
             }}
             key={value}
             className={cn(
-              "flex itemsc-enter gap-x2 px2 py1 roundedsm hover:bg-neutral-200/80",
+              "flex items-center gap-x2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
               (value === 0 && !editor?.isActive("heading")) ||
                 (!editor?.isActive(`heading${value}`) && "bg-neutral-200/80")
             )}
