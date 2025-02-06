@@ -23,7 +23,7 @@ export default function RootLayout({
       >
          <NuqsAdapter>
             <ConvexClientProvider>
-            {children}
+              {children}
             </ConvexClientProvider>
           </NuqsAdapter>
       </body>

@@ -17,14 +17,22 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
     <ClerkProvider
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}
     >
-      <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
-        <Authenticated>{children}</Authenticated>
+      <ConvexProviderWithClerk 
+        useAuth={useAuth} 
+        client={convex}
+        
+      >
+        <AuthLoading>
+          <div>Authenticating...</div>
+        </AuthLoading>
+        <Authenticated>
+          {children}
+        </Authenticated>
         <Unauthenticated>
           <div className="flex flex-col items-center justify-center min-h-screen">
             <SignIn routing="hash"/>
           </div>
         </Unauthenticated>
-        
       </ConvexProviderWithClerk>
     </ClerkProvider>
   );
