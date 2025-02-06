@@ -15,7 +15,7 @@ export default function Navbar() {
             </h3>
         </div>
         <SearchInput />
-          <UserButton/>
+        <UserButton/>
     </nav>  
   )
 }
