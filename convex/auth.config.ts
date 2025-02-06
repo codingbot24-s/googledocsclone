@@ -1,7 +1,7 @@
 export default {
     providers: [
       {
-        domain: "https://evident-chow-52.clerk.accounts.dev",
+        domain: "https://accurate-bedbug-18.clerk.accounts.dev",
         applicationID: "convex",
       },
     ]
