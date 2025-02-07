@@ -4,11 +4,18 @@ import TemplateGallery from "./template-gallery"
 import { api } from "@/convex/_generated/api";
 import { usePaginatedQuery } from "convex/react";
 import DocumentsTable from "./document-table"  
+
 export default function Home() {
-
-  // TODO : error pagination
-
-  const {results, status, loadMore} = usePaginatedQuery(api.document.get, {}, {initialNumItems: 10});
+  const {results, status, loadMore} = usePaginatedQuery(
+    api.document.get,
+    {
+      paginationOpts: {  
+        numItems: 3,
+        cursor: null
+      }
+    },
+    { initialNumItems: 3 }
+  );
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -17,11 +24,11 @@ export default function Home() {
       </div>
       <div className="mt-16">
         <TemplateGallery />
-         <DocumentsTable
-           documents={results}
-           loadMore={loadMore}
-           status={status}
-         />
+        <DocumentsTable
+          documents={results}
+          loadMore={loadMore}
+          status={status}
+        />
       </div>  
     </div>
   ) 
