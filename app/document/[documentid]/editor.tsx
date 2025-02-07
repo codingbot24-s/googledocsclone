@@ -21,7 +21,11 @@ import Link from "@tiptap/extension-link";
 import { FontSizeExtension } from "@/app/extension/font-size";
 import { LineHeight } from "@/app/extension/line-height";
 // import Ruler from "./ruler";
+import { useLiveblocksExtension, FloatingToolbar } from "@liveblocks/react-tiptap";
+
+
 const Tiptap = () => {
+  const liveblocks = useLiveblocksExtension();
   const { setEditor } = useEditorStore();
 
   const editor = useEditor({

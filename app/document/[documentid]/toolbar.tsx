@@ -615,7 +615,7 @@ function ToolbarButton({ onClick, isActive, icon: Icon }: ToolbarButtonProps) {
 
 export default function Toolbar() {
   const { editor } = useEditorStore();
-  console.log(editor);
+  
 
   const sections: {
     label: string;
