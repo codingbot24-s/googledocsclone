@@ -24,22 +24,32 @@ export const create = mutation({
 
 export const get = query({
   args: {
-    paginationOpts: paginationOptsValidator  
+    paginationOpts: paginationOptsValidator,
+    search: v.optional(v.string()),  
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, {search,paginationOpts}, ) => {
     const user = await ctx.auth.getUserIdentity();
-
+    
     if (!user) {
       throw new Error("User not authenticated");
     }
 
-    const query = ctx.db
-      .query("document")
-      .filter(q => q.eq(q.field("ownerId"), user.subject));
+    if (search) {
+      return await ctx.db
+        .query("document")
+          .withSearchIndex("search_title",(q) => q.search("title",search).
+            eq("ownerId",user.subject)
+          ).
+            paginate(paginationOpts);
+    }
 
-    return await query.paginate(args.paginationOpts);  
-  },
+    return await ctx.db
+      .query("document")
+      .withIndex("by_owner_Id",(q) => q.eq("ownerId",user.subject))
+      .paginate(paginationOpts);
+  }
 });
+
 
 export const removeById = mutation({
   args: {
