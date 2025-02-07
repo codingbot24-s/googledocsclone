@@ -13,6 +13,7 @@ import { api } from "@/convex/_generated/api";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 interface RenameDialogProps {
   documentId: Id<"document">;
@@ -35,10 +36,17 @@ export default function RenameDialog({
     update({
       id: documentId,
       title: newTitle.trim() || "Untitled Document",
-    }).finally(() => {
-      setIsUpdating(false);
-      setOpen(false);
-    });
+    })
+      .catch((e) => {
+        toast.error(e.message);
+      })
+      .then(() => {
+        toast.success("Document renamed");
+      })
+      .finally(() => {
+        setIsUpdating(false);
+        setOpen(false);
+      });
   };
 
   return (

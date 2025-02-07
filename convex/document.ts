@@ -14,9 +14,12 @@ export const create = mutation({
       throw new Error("User not authenticated");
     }
 
+    const org_id =  (user.org_id ?? undefined) as | string | undefined;
+
     return await ctx.db.insert("document", {
       title: args.title ?? "Untitled Document",
       ownerId: user.subject,
+      organizationId: org_id,
       initialContent: args.initialContent ?? "",
     });
   }
@@ -34,6 +37,17 @@ export const get = query({
       throw new Error("User not authenticated");
     }
 
+    const org_id =  (user.org_id ?? undefined) as | string | undefined;
+
+    if (search && org_id) {
+      return await ctx.db
+        .query("document")
+          .withSearchIndex("search_title",(q) => q.search("title",search).
+            eq("organizationId",org_id)
+          )
+          .paginate(paginationOpts);
+    }
+
     if (search) {
       return await ctx.db
         .query("document")
@@ -41,6 +55,13 @@ export const get = query({
             eq("ownerId",user.subject)
           ).
             paginate(paginationOpts);
+    }
+
+    if (org_id) {
+      return await ctx.db
+        .query("document")
+        .withIndex("by_organization_Id",(q) => q.eq("organizationId",org_id))
+        .paginate(paginationOpts);
     }
 
     return await ctx.db

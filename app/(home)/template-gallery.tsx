@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
 import { Templates } from "../constant/template";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 export default function TemplateGallery() {
-
   const router = useRouter();
   const create = useMutation(api.document.create);
   const [isCreating, setIsCreating] = useState(false);
@@ -26,12 +26,17 @@ export default function TemplateGallery() {
       title,
       initialContent,
     })
-      .then ((documentId) => {
+      .catch((e) => {
+        toast.error(e.message);
+      })
+
+      .then((documentId) => {
+        toast.success("Document created");
         router.push(`/document/${documentId}`);
       })
-        .finally(() => {
-          setIsCreating(false);
-        })
+      .finally(() => {
+        setIsCreating(false);
+      });
   };
 
   return (
@@ -48,7 +53,7 @@ export default function TemplateGallery() {
                 <div
                   className={cn(
                     "aspect-[3/4] flex flex-col gap-y-2.5",
-                    isCreating && "pointer-events-none opacity-50",
+                    isCreating && "pointer-events-none opacity-50"
                   )}
                 >
                   <button
