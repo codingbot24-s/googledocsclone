@@ -14,7 +14,7 @@ export default function Home() {
         cursor: null
       }
     },
-    { initialNumItems: 3 }
+    { initialNumItems: 5 }
   );
   
   return (
