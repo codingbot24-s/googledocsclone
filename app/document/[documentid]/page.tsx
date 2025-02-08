@@ -19,7 +19,7 @@ export default async function DocumentIdpage({ params }: DocumentIdpageProps) {
         <Toolbar />
       </div>
         
-        {/* // TODO Fix the liveblocks room */}
+      
       <div className="pt-[144px] print:pt-0">
         <Room>
             <Editor />

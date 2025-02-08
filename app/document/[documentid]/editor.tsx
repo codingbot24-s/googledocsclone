@@ -22,7 +22,7 @@ import { FontSizeExtension } from "@/app/extension/font-size";
 import { LineHeight } from "@/app/extension/line-height";
 // import Ruler from "./ruler";
 import { useLiveblocksExtension, FloatingToolbar } from "@liveblocks/react-tiptap";
-
+import { Threads } from "./threads";
 
 const Tiptap = () => {
   const liveblocks = useLiveblocksExtension();
@@ -62,7 +62,10 @@ const Tiptap = () => {
       },
     },
     extensions: [
-      StarterKit,
+      liveblocks,
+      StarterKit.configure({
+        history: false,
+      }),
       FontSizeExtension,
       TaskList,
       Taskitem.configure({
@@ -99,6 +102,7 @@ const Tiptap = () => {
       {/* <Ruler/> */}
       <div className="min-w-max flex justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
+        <Threads editor={editor} />
       </div>
     </div>
   );
