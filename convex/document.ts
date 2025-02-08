@@ -122,6 +122,13 @@ export const updateById = mutation({
       throw new Error("Document not found");
     }
 
+    const isOwner = document.ownerId === user.subject;
+    const isOrgMember = !!(document.organizationId && document.organizationId === user.org_id);
+
+    if (!isOwner && !isOrgMember) {
+      throw new Error("Not authorized");
+    }
+
     if (document.ownerId !== user.subject) {
       throw new Error("Not authorized");
     }
@@ -133,3 +140,19 @@ export const updateById = mutation({
     return updatedDocument;
   }
 });
+
+
+export const getById = query({
+  args: {
+    id: v.id("document")
+  },
+  handler: async (ctx, {id}) => {
+    const document = await ctx.db.get(id);
+    
+    if (!document) {
+      throw new Error("Document not found");
+    }
+
+    return document;
+  }
+})

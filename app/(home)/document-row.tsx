@@ -15,6 +15,8 @@ interface DocumentRowProps {
 
 export default function DocumentRow({ document }: DocumentRowProps) {
 
+    
+
     const onNewTabClick = (id: string) => {
         window.open(`/document/${id}`, "_blank")
     }
