@@ -156,3 +156,20 @@ export const getById = query({
     return document;
   }
 })
+
+export const getByIds = query({
+  args: {
+    ids: v.array(v.id("document"))
+  },
+  handler: async (ctx, { ids }) => {
+    const documents = await Promise.all(ids.map(id => ctx.db.get(id)));
+
+    const notFoundIds = ids.filter((_, index) => !documents[index]);
+
+    if (notFoundIds.length > 0) {
+      throw new Error(`Documents not found for IDs: ${notFoundIds.join(", ")}`);
+    }
+
+    return documents;
+  }
+});
