@@ -41,7 +41,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { type Level } from "@tiptap/extension-heading";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -51,6 +51,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+import { KeyboardEvent } from "react";
 
 const LineHeightButton = () => {
   const { editor } = useEditorStore();
@@ -354,8 +356,8 @@ const ImageButton = () => {
           <Input
             placeholder="Enter Image Url"
             value={imageUrl}
-            onChange={(e: any) => setImageUrl(e.target.value)}
-            onKeyDown={(e: any) => {
+            onChange={(e:ChangeEvent<HTMLInputElement>) => setImageUrl(e.target.value)}
+            onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
               if (e.key === "Enter") {
                 handleImageUrlSubmit();
               }
@@ -401,7 +403,7 @@ const LinkButton = () => {
         <Input
           placeholder="https://exmaple.com"
           value={value}
-          onChange={(e: any) => setValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
         />
         <Button onClick={() => onChange(value)}>Apply</Button>
       </DropdownMenuContent>

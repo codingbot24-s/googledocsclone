@@ -9,7 +9,7 @@ export default function SearchInput() {
 
     const [value, setValue] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
-    const [search, setSearch] = useSearchParam("search");
+    const [_,setSearch] = useSearchParam("search");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);

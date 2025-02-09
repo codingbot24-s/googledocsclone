@@ -2,7 +2,7 @@
 
 import {auth,clerkClient} from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
-import { currentUser} from "@clerk/nextjs/server";
+
 import { Id } from "@/convex/_generated/dataModel";
 import { api } from "@/convex/_generated/api";
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -21,7 +21,6 @@ export async function getUsers() {
         organizationId:[ sessionClaims?.org_id as string],
     })
 
-    console
     const users = response.data.map((user) => ({
         id: user.id,
         name: user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous",

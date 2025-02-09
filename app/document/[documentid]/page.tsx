@@ -1,7 +1,3 @@
-import Editor from "./editor";
-import Toolbar from "./toolbar";
-import Navbar from "./navbar";
-import { Room } from "./Room";
 import { Id } from "@/convex/_generated/dataModel";
 import Document from "./document";
 import { auth } from "@clerk/nextjs/server";

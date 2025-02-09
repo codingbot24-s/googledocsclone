@@ -28,7 +28,6 @@ import {
   TextIcon,
   BoldIcon,
   ItalicIcon,
-  Underline,
   UnderlineIcon,
   StrikethroughIcon,
   RemoveFormattingIcon,
@@ -41,11 +40,11 @@ import { Inbox } from "./inbox";
 import { Doc } from "@/convex/_generated/dataModel";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { use } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import RemoveDialog from "@/components/ui/remove-dialog";
+import { toast } from "sonner";
 import RenameDialog from "@/components/ui/rename-dialog";
+
 interface NavbarProps {
   data: Doc<"document">;
 }

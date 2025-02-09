@@ -15,6 +15,11 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 
+interface Template {
+  id: string;
+  label: string;
+  imageUrl: string;
+}
 export default function TemplateGallery() {
   const router = useRouter();
   const create = useMutation(api.document.create);
@@ -45,7 +50,7 @@ export default function TemplateGallery() {
         <h3 className="text-base font-medium">start a new document</h3>
         <Carousel>
           <CarouselContent className="-ml-4">
-            {Templates.map((template: any) => (
+            {Templates.map((template: Template) => (
               <CarouselItem
                 key={template.id}
                 className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 pl-4"

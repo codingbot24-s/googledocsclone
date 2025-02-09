@@ -14,7 +14,7 @@ interface DocumentInputProps {
 export default function DocumentInput({ title, id }: DocumentInputProps) {
     
   const [value, setValue] = useState(title);
-  const [isError, setIsError] = useState(false);
+  const [isError] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const mutate = useMutation(api.document.updateById);

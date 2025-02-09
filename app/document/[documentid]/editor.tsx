@@ -21,7 +21,7 @@ import Link from "@tiptap/extension-link";
 import { FontSizeExtension } from "@/app/extension/font-size";
 import { LineHeight } from "@/app/extension/line-height";
 // import Ruler from "./ruler";
-import { useLiveblocksExtension, FloatingToolbar } from "@liveblocks/react-tiptap";
+import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 import { Threads } from "./threads";
 
 const Tiptap = () => {
