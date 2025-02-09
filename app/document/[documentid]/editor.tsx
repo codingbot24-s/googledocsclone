@@ -25,7 +25,9 @@ import { useLiveblocksExtension, FloatingToolbar } from "@liveblocks/react-tipta
 import { Threads } from "./threads";
 
 const Tiptap = () => {
-  const liveblocks = useLiveblocksExtension();
+  const liveblocks = useLiveblocksExtension({
+    offlineSupport_experimental: true,
+  });
   const { setEditor } = useEditorStore();
 
   const editor = useEditor({
