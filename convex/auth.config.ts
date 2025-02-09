@@ -1,8 +1,8 @@
 export default {
-    providers: [
-      {
-        domain: "https://accurate-bedbug-18.clerk.accounts.dev",
-        applicationID: "convex",
-      },
-    ]
-  };
+  providers: [
+    {
+      domain: "https://obliging-stallion-13.clerk.accounts.dev",
+      applicationID: "convex",
+    },
+  ]
+};
