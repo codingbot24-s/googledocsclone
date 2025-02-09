@@ -23,12 +23,14 @@ interface RemoveDialogProps {
   children: React.ReactNode;
 }
 
+// TODO 
 export default function RemoveDialog({
   documentId,
   children,
 }: RemoveDialogProps) {
   const remove = useMutation(api.document.removeById);
   const [isDeleting, setIsDeleting] = useState(false);
+  
 
   return (
     <AlertDialog>
@@ -57,6 +59,7 @@ export default function RemoveDialog({
                 })
                 .then(() => {
                   toast.success("Document removed");
+                 
                 })
                 .finally(() => setIsDeleting(false));
             }}
