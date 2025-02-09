@@ -25,5 +25,9 @@ export default async function DocumentIdpage({ params }: DocumentIdpageProps) {
     { id: documentid },
     { token }
   );
+
+  if (!preloadedDocument) {
+    throw new Error("Document not found");
+  }
   return <Document preloadDocument={preloadedDocument} />;
 }
