@@ -9,6 +9,7 @@ export default function SearchInput() {
 
     const [value, setValue] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_,setSearch] = useSearchParam("search");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

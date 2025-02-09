@@ -18,6 +18,7 @@ type User = {
   id: string;
   name: string;
   avatar: string;
+  color: string;
 };
 
 export function Room({ children }: { children: ReactNode }) {
@@ -28,7 +29,7 @@ export function Room({ children }: { children: ReactNode }) {
     () => async () => {
       try {
         const list = await getUsers();
-        setUser(list);
+        setUser(list.map(user => ({ ...user, color: '#000000' })));
       } catch {
         toast.error("Error fetching user");
       }
